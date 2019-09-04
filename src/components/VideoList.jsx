@@ -1,10 +1,11 @@
+import exampleVideoData from "/src/data/exampleVideoData.js";
+
+var videos = exampleVideoData.map((object) => {
+  return <div><h5><em>object.snippets.title</em><VideoListEntry props={object}/></h5></div>;
+});
 var VideoList = () => (
   <div className="video-list">
-    <div><h5><em>videoListEntry</em> view goes here</h5></div>
-    <div><h5><em>videoListEntry</em> view goes here</h5></div>
-    <div><h5><em>videoListEntry</em> view goes here</h5></div>
-    <div><h5><em>videoListEntry</em> view goes here</h5></div>
-    <div><h5><em>videoListEntry</em> view goes here</h5></div>
+    {videos};
   </div>
 );
 

@@ -1,4 +1,4 @@
-// couldn't get the other way of destructuring to work
+// couldn't get the other way of destructuring to work // This looks great (I think I misunderstood the destructuring syntax!)
 var VideoListEntry = ({video: {snippet: {title, description, thumbnails: {default: {url}}}}}) => (
   <div className="video-list-entry media">
     <div className="media-left media-middle">

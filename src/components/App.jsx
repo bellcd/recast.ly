@@ -1,3 +1,8 @@
+// we need to import our face data here so we can pass it as the props to the VideoList
+import exampleVideoData from "/src/data/exampleVideoData.js";
+// We also need to get acces to render it
+import VideoList from "./VideoList.js";
+
 var App = () => (
   <div>
     <nav className="navbar">
@@ -10,7 +15,8 @@ var App = () => (
         <div><h5><em>videoPlayer</em> view goes here</h5></div>
       </div>
       <div className="col-md-5">
-        <div><h5><em>videoList</em> view goes here</h5></div>
+        {/* because of the way props is defined on VideoList, it has to be called "videos", see line 14 of that file */}
+        <div><h5><em>videoList</em><VideoList videos={exampleVideoData}/></h5></div>
       </div>
     </div>
   </div>

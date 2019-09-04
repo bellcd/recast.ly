@@ -1,11 +1,11 @@
-import exampleVideoData from "/src/data/exampleVideoData.js";
+import VideoListEntry from "./VideoListEntry.js";
 
-var videos = exampleVideoData.map((object) => {
-  return <div><h5><em>object.snippets.title</em><VideoListEntry props={object}/></h5></div>;
-});
-var VideoList = () => (
+var VideoList = (props) => (
   <div className="video-list">
-    {videos};
+    {props.videos.map((video) => {
+      // similar to what happend in App, we have to pass the right props to VideListEntry
+      return <div><h5><em>{video.snippet.title}</em></h5> <VideoListEntry video={video}/></div>;
+    })}
   </div>
 );
 

@@ -1,7 +1,8 @@
-var VideoListEntry = ({title, description} = props.snippets) => (
+// couldn't get the other way of destructuring to work
+var VideoListEntry = ({video: {snippet: {title, description, thumbnails: {default: {url}}}}}) => (
   <div className="video-list-entry media">
     <div className="media-left media-middle">
-      <img className="media-object" src="https://i.ytimg.com/vi/1w8Z0UOXVaY/default.jpg" alt="" />
+      <img className="media-object" src={url} alt="" />
     </div>
     <div className="media-body">
       <div className="video-list-entry-title">{title}</div>

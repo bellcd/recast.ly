@@ -5,6 +5,7 @@ var VideoListEntry = ({video: {snippet: {title, description, thumbnails: {defaul
       <img className="media-object" src={url} alt="" />
     </div>
     <div className="media-body">
+      <div><h5><em>{title}</em></h5></div>
       <div className="video-list-entry-title">{title}</div>
       <div className="video-list-entry-detail">{description}</div>
     </div>

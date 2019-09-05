@@ -4,7 +4,9 @@ var VideoList = (props) => (
   <div className="video-list">
     {props.videos.map((video) => {
       // similar to what happend in App, we have to pass the right props to VideListEntry
-      return <div><h5><em>{video.snippet.title}</em></h5> <VideoListEntry video={video}/></div>;
+      return <VideoListEntry video={video}/>;
+      // had to take off the code before <VideoListEntry... and add it to VideoListEntry file on line 8
+      // in order for it to pass the tests <div><h5><em>{video.snippet.title}</em></h5> ...</div>
     })}
   </div>
 );

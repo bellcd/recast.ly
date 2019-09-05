@@ -1,5 +1,5 @@
 var VideoPlayer = ({video}) => {
-  let url = `https://www.youtube.com/embed/${video.id.videoId}?autoplay=1`;
+  let url = `https://www.youtube.com/embed/${video.id.videoId}`;
   return (
     <div className="video-player">
       <div className="embed-responsive embed-responsive-16by9">

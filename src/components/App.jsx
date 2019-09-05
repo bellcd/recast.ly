@@ -2,6 +2,8 @@
 import exampleVideoData from "/src/data/exampleVideoData.js";
 // We also need to get acces to render it
 import VideoList from "./VideoList.js";
+// same thing with the VideoPlayer component
+import VideoPlayer from "./VideoPlayer.js";
 
 var App = () => (
   <div>
@@ -12,7 +14,7 @@ var App = () => (
     </nav>
     <div className="row">
       <div className="col-md-7">
-        <div><h5><em>videoPlayer</em> view goes here</h5></div>
+        <div><h5><em>{exampleVideoData[0].snippet.title}</em><VideoPlayer video={exampleVideoData[0]}/></h5></div>
       </div>
       <div className="col-md-5">
         {/* because of the way props is defined on VideoList, it has to be called "videos", see line 14 of that file */}

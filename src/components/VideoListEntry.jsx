@@ -6,7 +6,7 @@ var VideoListEntry = ({videoClick, video, video: {snippet: {title, description, 
   // if you don't pass in an anonymous function so you can pass the arguments for "onClick"
   // it will click on load since you're invoking it
   // you want it to invoke... on the actual clicking event
-  <div className="video-list-entry media" onClick={ () => videoClick(video)}>
+  <div className="video-list-entry media" onClick={ () => videoClick(video)}> {/* does it matter if video is found through closure (like it is currently, right? or should we pass it into the anonymous function? */}
     <div className="media-left media-middle">
       <img className="media-object" src={thumbnails.default.url} alt="" />
     </div>

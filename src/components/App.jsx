@@ -50,6 +50,7 @@ class App extends React.Component {
             <div>
               {/* here is another way to not have to bind an onClick event on a component with line 16 above */}
               {/* <button onClick={() => this.onVideoListEntryClick}></button> */}
+              {/* I don't follow what's happening here ... will experiment a bit ... */}
               <h5>
                 {/* I commented this out because I think this was more of a place holder <em>videoList</em> */}
                 {/* This is the tricky part, first you have to realize that in order for the

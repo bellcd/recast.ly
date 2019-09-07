@@ -1,7 +1,8 @@
 import VideoListEntry from "./VideoListEntry.js";
 
+// props passed in were videos={this.state.videos} and videosClick={[function]}
 var VideoList = (props) => (
-  <div className="video-list">
+  <div className="video-list" >
     {props.videos.map((video) => {
       // similar to what happend in App, we have to pass the right props to VideListEntry
       // key is like a "private" prop type - that's how we can do a fix for the

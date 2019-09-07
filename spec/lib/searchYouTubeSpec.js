@@ -79,9 +79,9 @@ describe('searchYouTube', function() {
 
     // We want this test to make a real AJAX request
     xhr.restore();
-
     searchYouTube(options, (data) => {
-      expect(hasSameShape(data, exampleVideoData)).to.be.true;
+      // the array of videos is sitting at an 'items' property in the response from the server, so I changed what's passed into hasSameShape() to reflect that. Not sure if this is a good approach ...
+      expect(hasSameShape(data.items, exampleVideoData)).to.be.true;
       done();
     });
   });

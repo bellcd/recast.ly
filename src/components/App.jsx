@@ -4,12 +4,36 @@ import exampleVideoData from "/src/data/exampleVideoData.js";
 import VideoList from "./VideoList.js";
 // same thing with the VideoPlayer component
 import VideoPlayer from "./VideoPlayer.js";
+import YOUTUBE_API_KEY from "../config/youtube.js";
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      videos: exampleVideoData,
+      // one video object with empty fields initially
+      videos: [
+        {
+          kind: '',
+          etag: '',
+          id: {
+            kind: '',
+            videoId: ''
+          },
+          snippet: {
+            publishedAt: '',
+            channelId: '',
+            title: '',
+            description: '',
+            thumbnails: {
+              default: {
+                url: 'https://i.ytimg.com/vi/4ZAEBxGipoA/default.jpg',
+                width: 120,
+                height: 90
+              },
+            },
+          }
+        }
+      ],
       currentVideo: exampleVideoData[0]
     };
     // styling best practice: put bind functions below state
@@ -66,6 +90,19 @@ class App extends React.Component {
         </div>
       </div>
     );
+  }
+
+  componentDidMount() {
+    var options = {
+      key: YOUTUBE_API_KEY,
+      max: '5',
+      query: 'funny' // hardcoded sample string, this will change as we collect input from the search field
+    };
+    this.props.searchYouTube(options, (data) => {
+      this.setState({
+        videos: data.items
+      });
+    });
   }
 }
 

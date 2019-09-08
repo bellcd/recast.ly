@@ -32,21 +32,22 @@ class App extends React.Component {
     });
   }
 
-  // controlled component
-  // will render for every change in the search bar -> input
-  onSearchUpdate (event) {
-    this.setState({
-      query: event.target.value
-    });
-  }
+  // // controlled component
+  // // will render for every change in the search bar -> input
+  // onSearchUpdate (event) {
+  //   this.setState({
+  //     query: event.target.value
+  //   });
+  // }
 
   // will get the right videos from youtube with the search term
-  onSearchSubmit (event) {
+  onSearchSubmit (event, inputField) {
     event.preventDefault();
     var options = {
       key: YOUTUBE_API_KEY,
       max: '5',
-      query: this.state.query
+      // query: this.state.query
+      query: inputField.value // reads the value of the inputField argument, the <input> DOM node
     };
     this.props.searchYouTube(options, (data) => {
       this.setState({
@@ -76,7 +77,9 @@ class App extends React.Component {
           <div className="col-md-6 offset-md-3">
             <div>
               <h5>
-                <Search searchTerm={this.onSearchUpdate.bind(this)} searchSubmit={this.onSearchSubmit.bind(this)} />
+                {/* for controlled components */}
+                {/* <Search searchTerm={this.onSearchUpdate.bind(this)} searchSubmit={this.onSearchSubmit.bind(this)} /> */}
+                <Search searchSubmit={this.onSearchSubmit.bind(this)} />
               </h5>
             </div>
           </div>

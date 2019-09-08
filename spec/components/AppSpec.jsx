@@ -41,7 +41,6 @@ describe('App', function() {
       Simulate.click(videoEntryTitle);
       var player = findRenderedDOMComponentWithClass(app, 'video-player');
       var playerTitle = player.querySelector('.video-player-details h3');
-
       // This test assumes that if you can successfully update the video player's title,
       // you can also update the video and description
       expect(playerTitle.innerHTML).to.equal(videoEntryTitle.innerHTML);

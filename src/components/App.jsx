@@ -1,44 +1,30 @@
 // we need to import our face data here so we can pass it as the props to the VideoList
-import exampleVideoData from "/src/data/exampleVideoData.js";
+// import exampleVideoData from "/src/data/exampleVideoData.js";
 // We also need to get acces to render it
 import VideoList from "./VideoList.js";
 // same thing with the VideoPlayer component
 import VideoPlayer from "./VideoPlayer.js";
 import YOUTUBE_API_KEY from "../config/youtube.js";
+import exampleVideoData from "../data/exampleVideoData.js";
+import Search from "./Search.js";
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      // one video object with empty fields initially
-      videos: [
-        {
-          kind: '',
-          etag: '',
-          id: {
-            kind: '',
-            videoId: ''
-          },
-          snippet: {
-            publishedAt: '',
-            channelId: '',
-            title: '',
-            description: '',
-            thumbnails: {
-              default: {
-                url: 'https://i.ytimg.com/vi/4ZAEBxGipoA/default.jpg',
-                width: 120,
-                height: 90
-              },
-            },
-          }
-        }
-      ],
-      currentVideo: exampleVideoData[0]
+      //one video object with empty fields initially
+      videos: [],
+      //videos: exampleVideoData,
+      //default video?
+      currentVideo: exampleVideoData[0],
+      query: 'cats',
     };
     // styling best practice: put bind functions below state
     this.onVideoClick = this.onVideoClick.bind(this);
+    // uncontrolled component
+    // this.input = React.createRef();
   }
+
 
   onVideoClick (video) {
     this.setState({
@@ -46,14 +32,51 @@ class App extends React.Component {
     });
   }
 
+  // controlled component
+  // will render for every change in the search bar -> input
+  onSearchUpdate (event) {
+    this.setState({
+      query: event.target.value
+    });
+  }
+
+  // will get the right videos from youtube with the search term
+  onSearchSubmit (event) {
+    event.preventDefault();
+    var options = {
+      key: YOUTUBE_API_KEY,
+      max: '5',
+      query: this.state.query
+    };
+    this.props.searchYouTube(options, (data) => {
+      this.setState({
+        videos: data.items
+      });
+    });
+  }
+
+  componentDidMount() {
+    var options = {
+      key: YOUTUBE_API_KEY,
+      max: '5',
+      query: this.state.query // hardcoded sample string, this will change as we collect input from the search field
+    };
+    this.props.searchYouTube(options, (data) => {
+      this.setState({
+        videos: data.items
+      });
+    });
+  }
+
   render() {
+    // console.log('hello', this.state);
     return (
       <div>
         <nav className="navbar">
           <div className="col-md-6 offset-md-3">
             <div>
               <h5>
-                <em>search</em> view goes here
+                <Search searchTerm={this.onSearchUpdate.bind(this)} searchSubmit={this.onSearchSubmit.bind(this)} />
               </h5>
             </div>
           </div>
@@ -90,19 +113,6 @@ class App extends React.Component {
         </div>
       </div>
     );
-  }
-
-  componentDidMount() {
-    var options = {
-      key: YOUTUBE_API_KEY,
-      max: '5',
-      query: 'funny' // hardcoded sample string, this will change as we collect input from the search field
-    };
-    this.props.searchYouTube(options, (data) => {
-      this.setState({
-        videos: data.items
-      });
-    });
   }
 }
 

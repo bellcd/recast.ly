@@ -18,6 +18,7 @@ class App extends React.Component {
       //default video?
       currentVideo: exampleVideoData[0],
       query: 'cats',
+      timeout: null
     };
     // styling best practice: put bind functions below state
     this.onVideoClick = this.onVideoClick.bind(this);
@@ -49,12 +50,28 @@ class App extends React.Component {
       // query: this.state.query
       query: inputField.value // reads the value of the inputField argument, the <input> DOM node
     };
-    this.props.searchYouTube(options, (data) => {
-      this.setState({
-        videos: data.items
+
+    // debouncing the ajax request so it only fires 1x per 500ms max
+    let debounce = () => {
+      // user feedback would go here that they're sending requests too quickly
+      if (this.state.timeout !== null) {
+        alert(`Too many searches too quickly. Please wait a moment and search again for ${inputField.value}`);
+        clearTimeout(this.state.timeout);
+      }
+
+      this.props.searchYouTube(options, (data) => {
+        this.setState({
+          videos: data.items
+        });
       });
+    };
+
+    // queueing the debounced ajax call, and keeping track of its timer in state
+    this.setState({
+      timeout: setTimeout(debounce, 500)
     });
   }
+
 
   componentDidMount() {
     var options = {

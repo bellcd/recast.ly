@@ -2,7 +2,6 @@ import VideoListEntry from "./VideoListEntry.js";
 
 // props passed in were videos={App.state.videos.items} and videosClick={[function]}
 var VideoList = (props) => {
-  console.log(props);
   return (
     <div className="video-list" >
       {props.videos.map((video) => {

@@ -1,4 +1,4 @@
-var searchYouTube = (options, callback) => {
+var searchYouTube = (options, callback, timeout) => {
   // I patterned this ajax call off of what we did with the last sprint.
   // the specifics I got from the YouTube API docs
   $.ajax({
